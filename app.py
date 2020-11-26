@@ -10,17 +10,41 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/login')
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    return render_template('login.html')
+    if request.method == "POST":
+        email = request.form['email']
+        password = request.form['password']
+
+        # hash the password
+
+        # we first connect to localhost and soko_db
+        conn = pymysql.connect("localhost", "root", "", "soko_db")
+
+        # insert the records into the users tables
+        cursor = conn.cursor()
+        cursor.execute("select * from users where email = %s and password=%s", (email, password))
+
+        if cursor.rowcount ==1:
+            # take me to a different route and create a session
+            return render_template('login.html', msg="Login Succesfully")
+
+
+        else:
+            return render_template('login.html', msg="Login Failed")
+
+    else:
+        return render_template('login.html')
 
 
 
 @app.route('/signup', methods=['POST','GET'])
 def signup():
-    if request.method == 'POST':
+    if request.method == "POST":
         email = request.form['email']
         password = request.form['password']
+
+        # hash the password
 
         # we first connect to localhost and soko_db
         conn = pymysql.connect("localhost","root","","soko_db")
@@ -30,7 +54,6 @@ def signup():
         cursor.execute("insert into users(email,password) values (%s,%s)", (email,password))
         conn.commit()
         return render_template('signup.html', msg= "Record Saved Succesfully")
-
 
     else:
         return render_template('signup.html')
