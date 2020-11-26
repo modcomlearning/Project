@@ -27,9 +27,9 @@ def signup():
 
         # insert the records into the users tables
         cursor =  conn.cursor()
-        cursor.execute("insert into users(email,password) values (%s,%s)")
-
-
+        cursor.execute("insert into users(email,password) values (%s,%s)", (email,password))
+        conn.commit()
+        return render_template('signup.html', msg= "Record Saved Succesfully")
 
 
     else:
