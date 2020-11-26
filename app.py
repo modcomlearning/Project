@@ -1,5 +1,7 @@
 #  Flask uses HTML/JS/CSS/Python/Jinja2
 from flask import Flask, render_template
+from flask import request
+import pymysql
 app = Flask(__name__)  # flask object takes the the name of the application
 
 # Routing
@@ -14,11 +16,20 @@ def login():
 
 
 
-from flask import request
 @app.route('/signup', methods=['POST','GET'])
 def signup():
     if request.method == 'POST':
-        pass
+        email = request.form['email']
+        password = request.form['password']
+
+        # we first connect to localhost and soko_db
+        conn = pymysql.connect("localhost","root","","soko_db")
+
+        # insert the records into the users tables
+        cursor =  conn.cursor()
+        cursor.execute("insert into users(email,password) values (%s,%s)")
+
+
 
 
     else:
