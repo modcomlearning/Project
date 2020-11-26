@@ -13,12 +13,19 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/signup')
+
+from flask import request
+@app.route('/signup', methods=['POST','GET'])
 def signup():
-    return render_template('signup.html')
+    if request.method == 'POST':
+        pass
 
 
+    else:
+        return render_template('signup.html')
 
+
+# xampp
 if __name__ == '__main__':
     app.debug = True
     app.run()
