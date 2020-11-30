@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Our Products</h2>
+{{msg}}
+
+{% for row in rows %}
+   <img src={{row[7]}} alt="" width="20%"> <br>
+   <b>{{row[1]}}</b> <br>
+   <span>{{row[2]}}</span><br>
+   <b>KES {{row[4]}}</b>
+   <br>
+   <a href="">Purchase</a>
+   <br><br>
+{% endfor %}
+
+
+
+</body>
+</html>
