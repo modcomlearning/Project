@@ -16,9 +16,8 @@ def login():
         email = request.form['email']
         password = request.form['password']
 
-        # hash the password
-
-        # we first connect to localhost and soko_db
+        # # hash the password/ strength
+        # # we first connect to localhost and soko_db
         conn = pymysql.connect("localhost", "root", "", "soko_db")
 
         # insert the records into the users tables
@@ -29,7 +28,6 @@ def login():
             # take me to a different route and create a session
             return render_template('login.html', msg="Login Succesfully")
 
-
         else:
             return render_template('login.html', msg="Login Failed")
 
@@ -37,15 +35,14 @@ def login():
         return render_template('login.html')
 
 
-
 @app.route('/signup', methods=['POST','GET'])
 def signup():
     if request.method == "POST":
+
         email = request.form['email']
         password = request.form['password']
 
         # hash the password
-
         # we first connect to localhost and soko_db
         conn = pymysql.connect("localhost","root","","soko_db")
 
@@ -57,6 +54,20 @@ def signup():
 
     else:
         return render_template('signup.html')
+
+
+@app.route('/products')
+def products():
+    conn = pymysql.connect("localhost", "root", "", "soko_db")
+    
+
+
+
+
+
+
+
+
 
 
 # xampp
