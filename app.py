@@ -58,17 +58,21 @@ def signup():
 
 @app.route('/products')
 def products():
+    # Connect to database
     conn = pymysql.connect("localhost", "root", "", "soko_db")
     cursor = conn.cursor()
+    # execute the query using the cursor
     cursor.execute("select * from products")
+    # check if no records were found
     if cursor.rowcount < 1:
         return render_template('products.html', msg="No Products")
     else:
+        # return all rows found
         rows = cursor.fetchall()
-        return render_template('products.html', msg=rows)
+        return render_template('products.html', rows=rows)
 
 
-    
+
 
 
 
