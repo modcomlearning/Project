@@ -78,9 +78,19 @@ def products():
 
 
 
-
-
-
+@app.route('/purchase/<id>')
+def purchase(id):
+    conn = pymysql.connect("localhost", "root", "", "soko_db")
+    cursor = conn.cursor()
+    # execute the query using the cursor
+    cursor.execute("select * from products where product_id = %s", (id))
+    # check if no records were found
+    if cursor.rowcount < 1:
+        return render_template('purchase.html', msg="No Products")
+    else:
+        # return all rows found
+        rows = cursor.fetchall()
+        return render_template('purchase.html', rows=rows)
 
 
 
