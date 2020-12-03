@@ -69,7 +69,7 @@ def products():
     else:
         # return all rows found
         rows = cursor.fetchall()
-        return render_template('products.html', rows=rows)
+        return render_template('products.html',rows=rows)
 
 
 

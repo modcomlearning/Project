@@ -50,23 +50,26 @@
 <!--    danger, success, info, primary, secondary-->
       <a class="btn btn-info" href="">Learn More</a>
   </div>
-{{msg}}
-<section class="container">
+<h5>{{msg}}</h5>
+
+<section>
     <div class="row">
-            {% for row in rows %}
-             <div class="card col-md-3">
-               <img src={{row[7]}} alt="" width="20%"> <br>
-               <b class="card-heading">{{row[1]}}</b> <br>
-               <span class="card-text">{{row[2]}}</span><br>
-               <b>KES {{row[4]}}</b>
-               <br>
-               <a href="" class="card-link btn btn-warning">Purchase</a>
-               <br><br>
-              </div>
-        <br>
-            {% endfor %}
-     </div>
+        {% for row in rows %}
+          <div class="card col-md-3">
+              <img src="{{row[7]}}" alt="" width="20%">
+              <h5 class="card-heading">{{row[1]}}</h5>
+              <p class="text-muted">{{row[2]}}</p>
+              <b>{{row[4]}}</b> <br>
+              <i>{{row[5]}}</i>
+              <br>
+              <a href="" class="btn btn-outline-info">Purchase</a>
+          </div>
+        {% endfor %}
+    </div>
 </section>
+
+
+
 
 </body>
 </html>
