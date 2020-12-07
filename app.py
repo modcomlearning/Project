@@ -109,6 +109,15 @@ def checkout():
 
 
 
+
+@app.route('/logout')
+def logout():
+    session.pop('key',None)
+    from flask import redirect
+    return redirect('/login')
+
+
+
 # xampp
 if __name__ == '__main__':
     app.debug = True
