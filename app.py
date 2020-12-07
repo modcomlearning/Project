@@ -99,12 +99,13 @@ def purchase(id):
 
 
 
-
-
 # this route, users will need to login to access it
 @app.route('/checkout')
 def checkout():
-    return 'This is the checkout route'
+    if 'key' in session:
+        return 'You can access the checkout, you logged in'
+    else:
+        return 'You cannot access checkout, not logged in'
 
 
 
