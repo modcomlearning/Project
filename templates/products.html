@@ -59,7 +59,7 @@
           <div class="card col-md-3">
               <img src="{{row[7]}}" alt="" width="60%">
               <h5 class="card-heading">{{row[1]}}</h5>
-              <p class="text-muted">{{row[2]}}</p>
+              <p class="text-muted">{{row[2] | safe}}</p>
               <b>KES {{row[4]}}</b> <br>
               <i>Category: {{row[5]}}</i>
               <br>

@@ -1,9 +1,10 @@
 #  Flask uses HTML/JS/CSS/Python/Jinja2
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 from flask import request
 import pymysql
 app = Flask(__name__)  # flask object takes the the name of the application
-
+# create a secret key used in encrypting the sessions
+app.secret_key = "Wdg@#$%89jMfh2879mT"
 # Routing
 @app.route('/')
 def home():
@@ -24,9 +25,12 @@ def login():
         cursor = conn.cursor()
         cursor.execute("select * from users where email = %s and password=%s", (email, password))
 
-        if cursor.rowcount ==1:
+        if cursor.rowcount == 1:
             # take me to a different route and create a session
-            return render_template('login.html', msg="Login Succesfully")
+            session['key'] = email
+            from flask import redirect
+            #after successfull login, we create user session and redirect the user to /checkout
+            return redirect('/checkout')
 
         else:
             return render_template('login.html', msg="Login Failed")
@@ -35,6 +39,9 @@ def login():
         return render_template('login.html')
 
 
+
+
+# install python, pycharm, xampp
 @app.route('/signup', methods=['POST','GET'])
 def signup():
     if request.method == "POST":
@@ -46,6 +53,7 @@ def signup():
         # we first connect to localhost and soko_db
         conn = pymysql.connect("localhost","root","","soko_db")
 
+
         # insert the records into the users tables
         cursor =  conn.cursor()
         cursor.execute("insert into users(email,password) values (%s,%s)", (email,password))
@@ -54,6 +62,7 @@ def signup():
 
     else:
         return render_template('signup.html')
+
 
 
 @app.route('/products')
@@ -73,10 +82,6 @@ def products():
 
 
 
-
-
-
-
 # This routes reads products based on id
 @app.route('/purchase/<id>')
 def purchase(id):
@@ -91,6 +96,15 @@ def purchase(id):
         # return all rows found
         rows = cursor.fetchall()
         return render_template('purchase.html', rows=rows)
+
+
+
+
+
+# this route, users will need to login to access it
+@app.route('/checkout')
+def checkout():
+    return 'This is the checkout route'
 
 
 
