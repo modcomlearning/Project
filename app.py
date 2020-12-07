@@ -103,9 +103,12 @@ def purchase(id):
 @app.route('/checkout')
 def checkout():
     if 'key' in session:
-        return 'You can access the checkout, you logged in'
+        logged_in = session['key']
+        return render_template('checkout.html')
+
     else:
-        return 'You cannot access checkout, not logged in'
+        from flask import redirect
+        return redirect('/login')
 
 
 
@@ -117,6 +120,7 @@ def logout():
     return redirect('/login')
 
 
+# checkout   logout   login   checkout  logout checkout
 
 # xampp
 if __name__ == '__main__':
