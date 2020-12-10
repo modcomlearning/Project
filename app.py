@@ -2,7 +2,10 @@
 from flask import Flask, render_template, session
 from flask import request
 import pymysql
+from pandas.io import sql
+
 app = Flask(__name__)  # flask object takes the the name of the application
+
 # create a secret key used in encrypting the sessions
 app.secret_key = "Wdg@#$%89jMfh2879mT"
 # Routing
@@ -38,9 +41,6 @@ def login():
     else:
         return render_template('login.html')
 
-
-
-
 # install python, pycharm, xampp
 @app.route('/signup', methods=['POST','GET'])
 def signup():
@@ -53,7 +53,6 @@ def signup():
         # we first connect to localhost and soko_db
         conn = pymysql.connect("localhost","root","","soko_db")
 
-
         # insert the records into the users tables
         cursor =  conn.cursor()
         cursor.execute("insert into users(email,password) values (%s,%s)", (email,password))
@@ -62,7 +61,6 @@ def signup():
 
     else:
         return render_template('signup.html')
-
 
 
 @app.route('/products')
@@ -111,8 +109,6 @@ def checkout():
         return redirect('/login')
 
 
-
-
 @app.route('/logout')
 def logout():
     session.pop('key',None)
@@ -121,6 +117,8 @@ def logout():
 
 
 # checkout   logout   login   checkout  logout checkout
+# Creating shopping cart, flask,
+
 
 # xampp
 if __name__ == '__main__':
