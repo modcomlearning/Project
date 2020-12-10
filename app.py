@@ -119,6 +119,10 @@ def logout():
 # checkout   logout   login   checkout  logout checkout
 # Creating shopping cart, flask,
 
+# Option 1: Use JS  - Localhost
+# Option 2: MySQL - database
+# Option SQLite3
+
 
 # xampp
 if __name__ == '__main__':
