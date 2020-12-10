@@ -120,6 +120,7 @@ def logout():
 
 
 # build a simple cart with sqlite
+from flask import redirect, url_for
 import sqlite3
 con = sqlite3.connect('cart.db')
 con.execute('create table if not exists items(id INT, name TEXT, cost INT, qtty INT, total INT)')
@@ -136,6 +137,9 @@ def cart():
             cursor = con.cursor()
             cursor.execute("insert into items(id,name,cost,qtty,total) values(?,?,?,?,?)",
                            (id,name,cost,qtty,total))
+            con.commit()
+            return redirect(url_for('/purchase', id=id))
+
 
 
 
