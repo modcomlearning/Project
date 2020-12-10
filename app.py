@@ -132,6 +132,14 @@ def cart():
         qtty = float(request.form['name'])
         total  = cost * qtty
 
+        with sqlite3.connect('cart.db') as con:
+            cursor = con.cursor()
+            cursor.execute("insert into items(id,name,cost,qtty,total) values(?,?,?,?,?)",
+                           (id,name,cost,qtty,total))
+
+
+
+
 
 
 
