@@ -130,7 +130,7 @@ def cart():
         id = request.form['id']
         name = request.form['name']
         cost = float(request.form['cost'])
-        qtty = float(request.form['name'])
+        qtty = float(request.form['qtty'])
         total  = cost * qtty
 
         with sqlite3.connect('cart.db') as con:
@@ -138,10 +138,9 @@ def cart():
             cursor.execute("insert into items(id,name,cost,qtty,total) values(?,?,?,?,?)",
                            (id,name,cost,qtty,total))
             con.commit()
-            return redirect(url_for('/purchase', id=id))
-
-
-
+            return redirect(url_for('purchase', id=id))
+    else:
+        return redirect('products')
 
 
 
