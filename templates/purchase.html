@@ -31,6 +31,7 @@
             <h4>KES {{rows[0][4]}}</h4>
             <b class="badge badge-info">Get 1yr Waranty</b> <br><br>
             <form action="/cart" method="post">
+                <input type="hidden" name="id" value="{{rows[0][0]}}"> <br> <br>
                 <input type="hidden" name="name" value="{{rows[0][1]}}"> <br> <br>
                 <input type="hidden" name="cost" value="{{rows[0][4]}}"> <br> <br>
                 <input type="number" name="qtty" placeholder="Quantity"> <br> <br>

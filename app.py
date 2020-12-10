@@ -116,12 +116,36 @@ def logout():
     return redirect('/login')
 
 
-# checkout   logout   login   checkout  logout checkout
-# Creating shopping cart, flask,
 
-# Option 1: Use JS  - Localhost
-# Option 2: MySQL - database
-# Option SQLite3
+
+
+# build a simple cart with sqlite
+import sqlite3
+con = sqlite3.connect('cart.db')
+con.execute('create table if not exists items(id INT, name TEXT, cost INT, qtty INT, total INT)')
+@app.route('/cart', methods=['POST','GET'])
+def cart():
+    if request.method == 'POST':
+        id = request.form['id']
+        name = request.form['name']
+        cost = float(request.form['cost'])
+        qtty = float(request.form['name'])
+        total  = cost * qtty
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # xampp
