@@ -138,10 +138,26 @@ def cart():
             cursor.execute("insert into items(id,name,cost,qtty,total) values(?,?,?,?,?)",
                            (id,name,cost,qtty,total))
             con.commit()
+
             return redirect(url_for('purchase', id=id))
     else:
         return redirect('products')
 
+
+
+@app.route('/mycart')
+def mycart():
+    with sqlite3.connect('cart.db') as con:
+        cursor = con.cursor()
+        cursor.execute("select * from items")
+
+        if cursor.rowcount==0:
+            return render_template('mycart.html', msg = "Your Basket is Empty")
+        else:
+            rows = cursor.fetchall()
+            return render_template('mycart.html', rows = rows)
+
+        
 
 
 
