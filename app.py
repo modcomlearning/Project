@@ -157,7 +157,7 @@ def mycart():
             rows = cursor.fetchall()
             return render_template('mycart.html', rows = rows)
 
-        
+
 
 
 
