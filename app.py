@@ -155,7 +155,12 @@ def mycart():
             return render_template('mycart.html', msg = "Your Basket is Empty")
         else:
             rows = cursor.fetchall()
-            return render_template('mycart.html', rows = rows)
+            # get totals
+            total_sum =0
+            for row in rows:
+                total_sum = total_sum + row[4]
+
+            return render_template('mycart.html', rows = rows, total_sum = total_sum)
 
 
 
