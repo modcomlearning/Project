@@ -12,6 +12,10 @@
    <h2 class="jumbotron">My Basket</h2>
    {{msg}} <br>
    <div class="container">
+       {% if session['key'] %}
+            Logged in as:  {{ session['key'] }}
+       {% endif %}
+
        <table class="table table-striped table-dark">
            {% for row in rows  %}
              <tr>
